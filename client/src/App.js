@@ -11,20 +11,37 @@ import {
 
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
+import Home from "./components/pages/Home";
+import Drawing from "./components/pages/Drawing";
+import Detecting from "./components/pages/Detecting";
+
+import BareMenu from "./components/Navbar/BareMenu";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <><BareMenu /><Home /></>,
+  },
+  {
+    path: "/home",
+    element: <><BareMenu /><Home /></>,
   },
   {
     path: "/about",
-    element: <About />,
+    element:  <><BareMenu /><About /></>,
   },
   {
     path: "/contact",
-    element: <Contact />,
-  }
+    element:  <><BareMenu /><Contact /></>,
+  },
+  {
+    path: "/draw",
+    element:  <><BareMenu /><Drawing /></>,
+  },
+  {
+    path: "/detect",
+    element:  <><BareMenu /><Detecting /></>,
+  },
 ]);
 
 function App() {
