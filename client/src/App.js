@@ -1,36 +1,38 @@
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import React from "react";
+
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom"; 
+
+import About from "./components/pages/About";
+import Contact from "./components/pages/Contact";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello world!</div>,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  }
+]);
 
 function App() {
 
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-        {!data ? "Loading..." : data}
-        </p>
-        <p>Dataset</p>
-        <a
-          className="App-link"
-          href="https://www.nist.gov/itl/products-and-services/emnist-dataset"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          EMNIST dataset
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router}/>
   );
+
 }
 
 export default App;
