@@ -15,32 +15,32 @@ import Home from "./components/pages/Home";
 import Drawing from "./components/pages/Drawing";
 import Detecting from "./components/pages/Detecting";
 
-import BareMenu from "./components/Navbar/BareMenu";
+import SideBar from "./components/Sidebar/SideBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <><BareMenu /><Home /></>,
+    element: <><SideBar name={"Homepage"}/><Home /></>,
   },
   {
     path: "/home",
-    element: <><BareMenu /><Home /></>,
+    element: <><SideBar name={"Homepage"} /><Home /></>,
   },
   {
     path: "/about",
-    element:  <><BareMenu /><About /></>,
+    element: <><SideBar name={"About"}/><About /></>,
   },
   {
     path: "/contact",
-    element:  <><BareMenu /><Contact /></>,
+    element: <><SideBar name={"Contact"} /><Contact /></>,
   },
   {
     path: "/draw",
-    element:  <><BareMenu /><Drawing /></>,
+    element: <><SideBar name={"Drawing"} /><Drawing /></>,
   },
   {
     path: "/detect",
-    element:  <><BareMenu /><Detecting /></>,
+    element: <><SideBar name={"Detecting"} /><Detecting /></>,
   },
 ]);
 

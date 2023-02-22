@@ -6,11 +6,9 @@ import Box from "@mui/material/Box";
 
 import { HeroBox } from "../styles/HeroBox";
 
-import BareMenu from "../Navbar/BareMenu";
-
 function Home() {
   return (
-      <Grid container spacing={2} columns={2}>
+      <Grid container spacing={2} columns={2} >
       <Grid item xs={2}>
         <Title component="h1">
           Homepage

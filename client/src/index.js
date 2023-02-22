@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // temporary
-import BareMenu from "./components/Navbar/BareMenu";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
