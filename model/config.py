@@ -10,3 +10,6 @@ TRAIN_Y_FILE = env["TRAIN_Y_FILE"]
 TEST_X_FILE = env["TEST_X_FILE"]
 TEST_Y_FILE = env["TEST_Y_FILE"]
 MAP_FILE = env["MAP_FILE"]
+
+# Generation of images
+IMG_SAVE_PATH = "./../client/src/galleryimages/"

@@ -96,58 +96,9 @@ def train_model(model, train_features, train_label, epochs,
 
   return epochs, hist 
 
-def load_imgs(dpath, mapping, labels, len=731668): # 731,668 samples in the training set
-  f_data = gzip.open(dpath, "rb")
-
-  print("mappings")
-  print(mapping)
-
-  print("labels")
-  print(labels)
-
-  image_size = 28
-  num_images = len
-
-  f_data.read(16)
-  buf = f_data.read(image_size * image_size * num_images)
-  data = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
-  data = data.reshape(num_images, image_size, image_size)
-  data = np.flip(data, axis=1)
-  data = np.array([np.rot90(img, 3) for img in data])
-
-  for i in range(0, len):
-    image = np.asarray(data[i]).squeeze()
-    plt.imshow(image)
-    plt.title(mapping[labels[i][0]])
-    plt.axis("off")
-    plt.savefig(f"images/image{i}.png")
-  df = pd.DataFrame(data[0])
-  return df
-
-def load_labs(dpath, len=731668):
-  f = gzip.open(dpath,'rb')
-
-  f.read(8)
-  labels = []
-  for i in range(0,len):   
-      buf = f.read(1)
-      label = np.frombuffer(buf, dtype=np.uint8).astype(np.int64)
-      labels.append(label)
-      print(i, label)
-
-  return np.array(labels)
-
-def load_map(dpath):
-  mapping_dictionary = {}
-  with open(dpath) as dict_file:
-    for line in dict_file:
-      (key, val) = line.split()
-      mapping_dictionary[int(key)] = chr(int(val))
-  return mapping_dictionary
-
 def main():
   # Load MNIST (TODO EMNIST)
-  n_samples = 10
+  n_samples = 100
 
   print("> Loading label mapping")
   lab_map = load_map(DATA_PATH + MAP_FILE)
