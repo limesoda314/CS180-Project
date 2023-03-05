@@ -63,7 +63,7 @@ function Home() {
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <Box>
                   <img
-                    src={require(`./../../images/image${index}.png`)}
+                    src={require(`./../../galleryimages/image${index}.png`)}
                     alt={`image${index}`}
                     loading="lazy"
                     width="250" 
