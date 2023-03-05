@@ -96,8 +96,14 @@ def train_model(model, train_features, train_label, epochs,
 
   return epochs, hist 
 
-def load_imgs(dpath, len=731668): # 731,668 samples in the training set
+def load_imgs(dpath, mapping, labels, len=731668): # 731,668 samples in the training set
   f_data = gzip.open(dpath, "rb")
+
+  print("mappings")
+  print(mapping)
+
+  print("labels")
+  print(labels)
 
   image_size = 28
   num_images = len
@@ -106,37 +112,51 @@ def load_imgs(dpath, len=731668): # 731,668 samples in the training set
   buf = f_data.read(image_size * image_size * num_images)
   data = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
   data = data.reshape(num_images, image_size, image_size)
+  data = np.flip(data, axis=1)
+  data = np.array([np.rot90(img, 3) for img in data])
 
-  # print(data[0]) 
-
-  for i in range(0, 20):
-    plt.imshow(data[i])
+  for i in range(0, len):
+    image = np.asarray(data[i]).squeeze()
+    plt.imshow(image)
+    plt.title(mapping[labels[i][0]])
+    plt.axis("off")
     plt.savefig(f"images/image{i}.png")
-
-
   df = pd.DataFrame(data[0])
-  # print(data[0])
   return df
 
 def load_labs(dpath, len=731668):
   f = gzip.open(dpath,'rb')
 
   f.read(8)
+  labels = []
   for i in range(0,len):   
       buf = f.read(1)
-      labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int64)
-      print(labels)
+      label = np.frombuffer(buf, dtype=np.uint8).astype(np.int64)
+      labels.append(label)
+      print(i, label)
+
+  return np.array(labels)
+
+def load_map(dpath):
+  mapping_dictionary = {}
+  with open(dpath) as dict_file:
+    for line in dict_file:
+      (key, val) = line.split()
+      mapping_dictionary[int(key)] = chr(int(val))
+  return mapping_dictionary
 
 def main():
-
-  plt.interactive(True)
   # Load MNIST (TODO EMNIST)
-  # (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+  n_samples = 10
 
-  n_samples = 20
+  print("> Loading label mapping")
+  lab_map = load_map(DATA_PATH + MAP_FILE)
 
-  x_train = load_imgs(DATA_PATH + TRAIN_X_FILE, n_samples) # 731,668 images in the training set
-  y_train = load_labs(DATA_PATH + TRAIN_Y_FILE, n_samples)
+  print("> Loading labels")
+  y_train = load_labs(DATA_PATH + TRAIN_Y_FILE, n_samples) # 731,668 labels in the training set
+
+  print("> Loading images")
+  x_train = load_imgs(DATA_PATH + TRAIN_X_FILE, lab_map, y_train, n_samples) # 731,668 images in the training set
 
   # x_train = pd.read_csv(DATA_PATH + TRAIN_X_FILE, header=None)
   # y_train = pd.read_csv(DATA_PATH + TRAIN_Y_FILE, header=None)
