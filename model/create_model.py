@@ -15,9 +15,7 @@ from keras import backend as k
 from keras.utils.np_utils import to_categorical
 
 from config import *
-
 import gzip
-
 import idx2numpy
 
 def preprocess_data(x_train, x_test):
@@ -39,7 +37,6 @@ def preprocess_data(x_train, x_test):
   x_train /= 255
   x_test /= 255
 
-  # EMNIST dataset might not allow this
   # one hot encoding 
   y_train = to_categorical(y_train, num_classes=10)
   y_test = to_categorical(y_test, num_classes=10)
