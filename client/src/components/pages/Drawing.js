@@ -8,16 +8,24 @@ import Button from "@mui/material/Button";
 
 import { useRef } from 'react';
 import CanvasDraw from "react-canvas-draw";
-import { Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 
 function Drawing() {
   const [show, toggleShow] = React.useState(true); // used in ToggleButton 
   const canvasRef = useRef(null);
   const [drawing, setDrawing] = React.useState();
+ 
 
   const ExportDrawing = () => {
-    const base64 = canvasRef.current.canvasContainer.childNodes[1].toDataURL();
+
+    var base64 = canvasRef.current.canvasContainer.childNodes[1].toDataURL("image/png");
     setDrawing(base64);
+    base64 = base64.replace("image/png", "image/octet-stream"); 
+    //window.location.href=base64; 
+    var link = document.getElementById('download_image');
+    link.setAttribute('download', 'untitled.png');
+    link.setAttribute('href', base64);
+    link.click();
   };
 
   const ToggleButton = () => {
@@ -55,7 +63,10 @@ function Drawing() {
               <Button variant="contained"
               onClick={ExportDrawing}
               >Next</Button> 
-              <img src={drawing} alt="exported drawing" />
+              <Box>
+              <a id = "download_image"> <img src={drawing}/> </a>
+              </Box>
+              
             </Box>
             : <Box></Box>}
           </Grid>
@@ -79,9 +90,7 @@ function Drawing() {
         </Grid>
         <Grid item xs={16}>
           <TextBox>
-            This is where the explanation would be. We could
-            also include an image, similar to the "HERO" image
-            that we include in the Home page.
+            Draw a letter or digit. Undo removes the latest change to the canvas. Clear clears the canvas and can be undone. Next downloads and displays the image. The canvas is cleared as well. 
           </TextBox>
         </Grid>
         {/* <Grid item xs={16}>
