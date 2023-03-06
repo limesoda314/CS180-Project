@@ -13,3 +13,6 @@ MAP_FILE = env["MAP_FILE"]
 
 # Generation of images
 IMG_SAVE_PATH = "./../client/src/galleryimages/"
+
+# Model training
+NUM_CLASSES = 47
