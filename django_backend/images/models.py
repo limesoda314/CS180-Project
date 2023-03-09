@@ -12,7 +12,7 @@ class Image(models.Model):
     '''
 
     img_id = models.AutoField(primary_key=True)
-    label = models.CharField(max_length=10) # holds the label of the image
+    label = models.CharField(max_length=10, default="none") # holds the label of the image
     timestamp = models.TimeField(auto_now=True)
     data = models.ImageField(upload_to="digit_imgs")
 

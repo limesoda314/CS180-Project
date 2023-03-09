@@ -20,12 +20,13 @@ function Drawing() {
     var base64 = canvasRef.current.canvasContainer.childNodes[1].toDataURL("image/png");
     setDrawing(base64);
     
-    //base64 = base64.replace("image/png", "image/octet-stream"); 
-    //window.location.href=base64; 
-    //var link = document.getElementById('download_image');
-    //link.setAttribute('download', 'untitled.png');
-    //link.setAttribute('href', base64);
-    //link.click();
+    // downloading
+    base64 = base64.replace("image/png", "image/octet-stream"); 
+    window.location.href=base64; 
+    var link = document.getElementById('download_image');
+    link.setAttribute('download', 'untitled.png');
+    link.setAttribute('href', base64);
+    link.click();
   };
 
   const ToggleButton = () => {
