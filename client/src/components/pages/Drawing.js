@@ -14,18 +14,18 @@ function Drawing() {
   const [show, toggleShow] = React.useState(true); // used in ToggleButton 
   const canvasRef = useRef(null);
   const [drawing, setDrawing] = React.useState();
- 
 
   const ExportDrawing = () => {
 
     var base64 = canvasRef.current.canvasContainer.childNodes[1].toDataURL("image/png");
     setDrawing(base64);
-    base64 = base64.replace("image/png", "image/octet-stream"); 
+    
+    //base64 = base64.replace("image/png", "image/octet-stream"); 
     //window.location.href=base64; 
-    var link = document.getElementById('download_image');
-    link.setAttribute('download', 'untitled.png');
-    link.setAttribute('href', base64);
-    link.click();
+    //var link = document.getElementById('download_image');
+    //link.setAttribute('download', 'untitled.png');
+    //link.setAttribute('href', base64);
+    //link.click();
   };
 
   const ToggleButton = () => {
@@ -45,12 +45,13 @@ function Drawing() {
           {!show ?
               <CanvasDraw 
               ref={ canvasRef }
+              style={{marginLeft: "40%", border: '5px solid black'}}
               />
           : <Box></Box>}
           </Grid>
-          <Grid item xs={16}>
+          <Grid item xs={16} >
           {!show ?
-            <Box>
+            <Box >
               <Button variant="contained" 
                 onClick={() => {
                   canvasRef.current.undo();
@@ -101,9 +102,7 @@ function Drawing() {
         {/* <Grid item xs={16}> */}
         <ToggleButton />
         {/* </Grid> */}
-        <Grid item alignItems="center" xs={16}>
-          <Typography>Hello world</Typography>
-        </Grid>
+        
     </Grid>
   );
 }

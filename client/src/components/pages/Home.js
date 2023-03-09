@@ -6,11 +6,13 @@ import Box from "@mui/material/Box";
 
 import { HeroBox } from "../styles/HeroBox";
 import { requirePropFactory } from "@mui/material";
+import { Link } from "react-router-dom";
+import { red } from "@mui/material/colors";
 
 function Home() {
   
-
   return (
+    
       <Grid container spacing={2} columns={2} >
       <Grid item xs={2}>
         <Title component="h1">
@@ -38,16 +40,20 @@ function Home() {
       </Grid>
       <Grid item xs={1}>
         <Box textAlign="center">
+        <Link to="/draw" style={{ textDecoration: 'none', color: 'DodgerBlue' }} > 
           <Button variant="outlined">
-            Drawing
+          Drawing
           </Button>
+        </Link>
         </Box>
       </Grid>
       <Grid item xs={1}>
         <Box textAlign="center">
+        <Link to="/detect" style={{ textDecoration: 'none', color: 'DodgerBlue' }}>
           <Button variant="outlined">
-            Detecting
+           Detect
           </Button>
+          </Link>
         </Box>
       </Grid>
       <Grid item xs={2}>
@@ -56,7 +62,7 @@ function Home() {
         </Title>
         <Box>
           <TextBox>
-            This box would be populated with images in a MxN grid.
+            Below are some samples of images taken from the emnist dataset. 
           </TextBox>
           <Grid container p={2} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 12, md: 16 }}>
             {Array.from(Array(20)).map((_, index) => (
