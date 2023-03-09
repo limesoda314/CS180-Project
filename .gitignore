@@ -1,2 +1,4 @@
 venv/
+django_venv/
 .env
+node_modules
