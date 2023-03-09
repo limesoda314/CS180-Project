@@ -14,6 +14,14 @@ function Drawing() {
   const [show, toggleShow] = React.useState(true); // used in ToggleButton 
   const canvasRef = useRef(null);
   const [drawing, setDrawing] = React.useState();
+  var randval = 0; 
+
+  var RandChar = () => {
+    let result = ''; 
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+    return result; 
+  };
 
   const ExportDrawing = () => {
 
@@ -35,7 +43,10 @@ function Drawing() {
           <Grid item xs={16}>
             {show ?
             <Button variant="contained"
-              onClick={() => toggleShow(!show) }
+              onClick={() => {
+                toggleShow(!show); 
+                }
+              }
             >
               Start
             </Button>
@@ -43,15 +54,20 @@ function Drawing() {
             }
           </Grid>
           <Grid item xs={16}>
+          
           {!show ?
-              <CanvasDraw 
-              ref={ canvasRef }
-              style={{marginLeft: "40%", border: '5px solid black'}}
-              />
+              <Box>
+                Draw the character {RandChar()}
+                <CanvasDraw 
+                ref={ canvasRef }
+                style={{marginLeft: "40%", border: '5px solid black'}}/>
+              </Box>
+              
           : <Box></Box>}
           </Grid>
           <Grid item xs={16} >
           {!show ?
+            
             <Box >
               <Button variant="contained" 
                 onClick={() => {
@@ -63,8 +79,9 @@ function Drawing() {
                   canvasRef.current.clear();
               }}>Clear</Button>
               <Button variant="contained"
-              onClick={ExportDrawing}
-              >Next</Button> 
+              onClick={ () => {
+                ExportDrawing()}
+              }>Next</Button> 
               <Box>
               <a id = "download_image"> <img src={drawing}/> </a>
               </Box>
