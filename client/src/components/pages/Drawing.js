@@ -29,12 +29,44 @@ function Drawing() {
     setDrawing(base64);
     
     // downloading
-    base64 = base64.replace("image/png", "image/octet-stream"); 
-    window.location.href=base64; 
-    var link = document.getElementById('download_image');
-    link.setAttribute('download', 'untitled.png');
-    link.setAttribute('href', base64);
-    link.click();
+    // base64 = base64.replace("image/png", "image/octet-stream"); 
+    // window.location.href=base64; 
+    // var link = document.getElementById('download_image');
+    // console.log(base64);
+
+    let long = 0;
+    let latt = 0;
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        long = position.coords.longitude;
+        latt = position.coords.latitude;
+      });
+    }
+    else {
+      long = -9999.999;
+      latt = -9999.999;
+    }
+    
+    const postBody = JSON.stringify({
+        label: "none", // TODO: insert variable name
+        data: base64, // trying base64 but I fear it will not work
+        longitude: long,
+        latitude: latt
+    });
+
+    const options = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": "application/json",
+      },
+      body: postBody
+    };
+
+    fetch("http://localhost:8000/api/image/", options)
+    .then(response => response.json());
+    // .then(data => this.setState({ postId: data.id }));
   };
 
   const ToggleButton = () => {
