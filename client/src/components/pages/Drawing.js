@@ -89,7 +89,8 @@ function Drawing() {
           
           {!show ?
               <Box>
-                Draw the character {RandChar()}
+                <h2>Draw the character</h2> 
+                <h1>{RandChar()}</h1>
                 <CanvasDraw 
                 ref={ canvasRef }
                 style={{marginLeft: "40%", border: '5px solid black'}}/>
@@ -101,12 +102,12 @@ function Drawing() {
           {!show ?
             
             <Box >
-              <Button variant="contained" 
+              <Button variant="contained"  
                 onClick={() => {
                   canvasRef.current.undo();
                 }}>Undo
               </Button>
-              <Button variant="contained"
+              <Button variant="contained" style={{margin: '5px'}}
                 onClick={() => {
                   canvasRef.current.clear();
               }}>Clear</Button>

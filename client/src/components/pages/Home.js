@@ -15,27 +15,15 @@ function Home() {
     
       <Grid container spacing={2} columns={2} >
       <Grid item xs={2}>
-        <Title component="h1">
-          Homepage
-        </Title>
+        
         <HeroBox>
-          This is the "HERO" of the website, where we place
-          random images to show the user what our website is
-          generally about. We can either (1) automatically
-          scroll through the images, or do so manually via
-          left and right buttons. We can also include floating
-          text throughout the "HERO".
-
-          ...
-          Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis
-          nostrud exercitation ullamco laboris nisi ut aliquip
-          ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore
-          eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non proident, sunt in culpa qui officia
-          deserunt mollit anim id est laborum.
+        <h1>
+          AlphaNumeric Detector 
+        </h1>
+        <h2>
+          X-ML
+        </h2>
+          
         </HeroBox>
       </Grid>
       <Grid item xs={1}>
@@ -61,10 +49,10 @@ function Home() {
           Gallery
         </Title>
         <Box>
-          <TextBox>
+          <TextBox style={{marginLeft: '2%', marginRight: '2%'}}>
             Below are some samples of images taken from the emnist dataset. 
           </TextBox>
-          <Grid container p={2} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 12, md: 16 }}>
+          <Grid container p={4} spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 12, md: 16 }}>
             {Array.from(Array(20)).map((_, index) => (
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <Box>

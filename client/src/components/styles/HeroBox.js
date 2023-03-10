@@ -6,7 +6,11 @@ const HeroBox = styled(Paper)(({ theme }) => ({
     ...theme.typography.body1,
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.primary,
+    color: 'white', /*theme.palette.text.primary,*/
+    backgroundColor: '#008DC0' , /* '#296d98''#1c4966'*/
+    height: '250px',
+    paddingTop: '50px',
+    
 }));
 
 export {HeroBox};

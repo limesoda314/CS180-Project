@@ -68,6 +68,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-start',
+  
 }));
 
 function SideBar(props) {
