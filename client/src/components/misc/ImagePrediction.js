@@ -62,13 +62,12 @@ const ImagePrediction = (props) => {
             {
                 predictions.map( (pred, index) => (
                     <div key={index}>
-                        <div>
-                        
+                        <Typography variant="h5">
                             {(index)}.
                             - {indexes[index].toString().padStart(3, "0")} -
                             {labels[index].padStart(3, " ").padEnd(2, "-")} - {parseFloat(pred*100).toPrecision(8)}
                         
-                        </div>
+                        </Typography>
                     </div>
                 ))
             }

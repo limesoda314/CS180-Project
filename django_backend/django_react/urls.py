@@ -17,11 +17,15 @@ Including another URLconf
 from django.urls import path, include
 
 from emnistmodel import views
+from emnistdetecto import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include('images.urls')),
 
     # machine learning model
-    path("model/", views.call_model.as_view())
+    path("model/", views.call_model.as_view()),
+
+    # detecto machine learning model
+    path("modeld/", views.call_model.as_view()),
 ]

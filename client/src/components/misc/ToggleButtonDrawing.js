@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CanvasDraw from "react-canvas-draw";
 import { TextBox } from "../styles/TextStyles";
-import { Typography } from "@mui/material";
+import { Typography, useThemeProps } from "@mui/material";
 import ImagePrediction from "./ImagePrediction";
 
 var RandChar = () => {
@@ -14,7 +14,8 @@ var RandChar = () => {
     return result; 
 };
 
-const ToggleButton = () => {
+const ToggleButtonDrawing = (props) => {
+  
     const [show, setShow] = useState(false);
     const canvasRef = useRef(null);
     const [drawing, setDrawing] = React.useState();
@@ -79,13 +80,19 @@ const ToggleButton = () => {
     };
 
     return (
-        <>
+        <Grid
+          container
+          spacing={4}
+          columns={16}>
           <Grid item xs={16}>
             {!show ?
-            <Button variant="contained"
+            <Button
+              style={{width: "25%", height: "150%", fontSize:25}}
+              variant="contained"
                 onClick={() => {
                     setShow(true);
                     setTicking(true);
+                    props.setShowParentInstructions(false);
                 }
               }
             >
@@ -94,62 +101,88 @@ const ToggleButton = () => {
             : <Box></Box>
             }
           </Grid>
-          <Grid item xs={16}>
-          
+          <Grid item xs={8}>
           {show ?
               <Box>
-                Draw the character { randChar = RandChar() }
+                <Typography variant="h4">
+                  Draw the character "{ randChar = RandChar() }"
+                </Typography>
                 <CanvasDraw
                     ref={ canvasRef }
-                    style={ { marginLeft: "40%", border: '5px solid black' } }
+                    style={ {
+                      marginRight: "auto",
+                      marginLeft: "auto",
+                      border: '5px solid black',
+                      } }
+                    
+                    brushRadius={30}
+                    canvasWidth={800}
+                    canvasHeight={800}
+
                     onClick={ () => {
                         console.log("clicking canvas");
                     }}
                 />
               </Box>
               
-          : <Box></Box>}
+          : <Box></Box>
+          }
           </Grid>
-          <Grid item xs={16} >
-          {show ?
-            
-            <Box >
-              <Button variant="contained" 
-                onClick={() => {
-                  canvasRef.current.undo();
-                }}>Undo
-              </Button>
-              <Button variant="contained"
-                onClick={() => {
-                  canvasRef.current.clear();
-              }}>Clear</Button>
-              <Button variant="contained"
-              onClick={ () => {
-                ExportDrawing();
-                canvasRef.current.clear();
-              }
-              }>Next</Button> 
-              {/* <Box>
-              <a id = "download_image"> <img src={drawing}/> </a>
-              </Box> */}
-              
-            </Box>
-            : <Box></Box>}
+          <Grid item xs={8}>
+            <Grid
+              container
+              spacing={2}
+              columns={16}>
+              <Grid item xs={16}>
+                {
+                    show ?
+                    <>
+                      <Box>
+                      <Typography variant="h4">
+                          Predictions (Most to Least Likely)
+                      </Typography>
+                      </Box>
+                      <ImagePrediction canvas={canvasRef}/>
+                    </>
+                    : <Box></Box>
+                }
+              </Grid>
+              <Grid item xs={16} >
+              {show ?
+                
+                <Box >
+                  <Button
+                    style={{width: "25%", height: "150%", fontSize:25}}
+                    variant="contained" 
+                    onClick={() => {
+                      canvasRef.current.undo();
+                    }}>Undo
+                  </Button>
+                  <Button
+                    style={{width: "25%", height: "150%", fontSize:25}}
+                    variant="contained"
+                    onClick={() => {
+                      canvasRef.current.clear();
+                  }}>Clear</Button>
+                  <Button
+                    style={{width: "25%", height: "150%", fontSize:25}}
+                    variant="contained"
+                    onClick={ () => {
+                      ExportDrawing();
+                      canvasRef.current.clear();
+                    }}
+                    >Next</Button> 
+                  {/* <Box>
+                  <a id = "download_image"> <img src={drawing}/> </a>
+                  </Box> */}
+                  
+                </Box>
+                : <Box></Box>}
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={16}>
-            <Box>
-                <Typography>
-                    Predictions
-                </Typography>
-            </Box>
-            {
-                show ?
-                <ImagePrediction canvas={canvasRef}/>
-                : <Box></Box>
-            }
-          </Grid>
-        </>
+        </Grid>
     )
   };
 
-export default ToggleButton;
+export default ToggleButtonDrawing;

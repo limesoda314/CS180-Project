@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import {TextBox, Title} from "../styles/TextStyles";
-import ToggleButton from "../misc/ToggleButton";
+import ToggleButtonDrawing from "../misc/ToggleButtonDrawing";
 import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 function Drawing() {
+  const [showInstructions, setShowInstructions] = useState(true);
 
   return (
       <Grid
@@ -21,6 +23,7 @@ function Drawing() {
           </Title>
         </Grid>
         <Grid item xs={16}>
+          { showInstructions ?
           <TextBox>
             <Typography>
               Draw a letter or digit. The game will prompt to you to write a letter (for example, "B").
@@ -50,15 +53,17 @@ function Drawing() {
 
             <Typography>Press <b>"Start"</b> to begin.</Typography>
           </TextBox>
+          : <Box></Box>
+        }
         </Grid>
         {/* <Grid item xs={16}>
           <Box textAlign="center">
-            <ToggleButton/> 
+            <ToggleButtonDrawing/> 
           </Box>
         </Grid> */}
-        {/* <Grid item xs={16}> */}
-        <ToggleButton/>
-        {/* </Grid> */}
+        <Grid item xs={16}>
+        <ToggleButtonDrawing setShowParentInstructions={setShowInstructions}/>
+        </Grid>
         
     </Grid>
   );

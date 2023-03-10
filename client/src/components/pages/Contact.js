@@ -17,7 +17,7 @@ function Contact() {
       </Grid>
       <Grid item xs={3}>
         <TextBox>
-          Information
+          Email: amiya017@ucr.edu 
         </TextBox>
       </Grid>
       <Grid item xs={3}>
@@ -27,7 +27,8 @@ function Contact() {
       </Grid>
       <Grid item xs={3}>
         <TextBox>
-          Information
+          
+          Email: ineto001@ucr.edu 
         </TextBox>
       </Grid>
     </Grid>

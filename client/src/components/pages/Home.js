@@ -5,43 +5,31 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import { HeroBox } from "../styles/HeroBox";
-import { requirePropFactory } from "@mui/material";
+import { requirePropFactory, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { red } from "@mui/material/colors";
 
 function Home() {
   
   return (
-    
       <Grid container spacing={2} columns={2} >
       <Grid item xs={2}>
-        <Title component="h1">
-          Homepage
-        </Title>
+        
         <HeroBox>
-          This is the "HERO" of the website, where we place
-          random images to show the user what our website is
-          generally about. We can either (1) automatically
-          scroll through the images, or do so manually via
-          left and right buttons. We can also include floating
-          text throughout the "HERO".
-
-          ...
-          Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis
-          nostrud exercitation ullamco laboris nisi ut aliquip
-          ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore
-          eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non proident, sunt in culpa qui officia
-          deserunt mollit anim id est laborum.
+        <h1>
+          AlphaNumeric Detector 
+        </h1>
+        <h2>
+          X-ML
+        </h2>
+          
         </HeroBox>
       </Grid>
       <Grid item xs={1}>
         <Box textAlign="center">
         <Link to="/draw" style={{ textDecoration: 'none', color: 'DodgerBlue' }} > 
-          <Button variant="outlined">
+          <Button
+            style={{width: "50%", height: "150%", fontSize:25}}
+            variant="outlined">
           Drawing
           </Button>
         </Link>
@@ -50,35 +38,91 @@ function Home() {
       <Grid item xs={1}>
         <Box textAlign="center">
         <Link to="/detect" style={{ textDecoration: 'none', color: 'DodgerBlue' }}>
-          <Button variant="outlined">
+          <Button
+            style={{width: "50%", height: "150%", fontSize:25}}
+            variant="outlined">
            Detect
           </Button>
           </Link>
         </Box>
       </Grid>
       <Grid item xs={2}>
-        <Title component="h3">
+        <TextBox
+          style={
+            {
+              marginLeft:"5%",
+              marginRight:"5%"
+            }
+          }
+        >
+          <Typography variant="h5">
+            Data scarcity is very real for certain applications. For instance, the MNIST dataset only has around 60 thousand samples to work with.
+            And while the EMNIST dataset has significantly more, there remains a need to gather character image data. This project proposes a fun
+            way to gather this data in an crowd sourcing manner. The more users utilize this website for its intended purpose, the more good quality
+            data we will have to carry out useful tasks.
+
+            <br/><br/>
+
+            The <b>DRAWING</b> mode focuses on the data collection aspect of our project, whereas the <b>DETECT</b> mode focuses on the fun user application.
+            Specifically, users upload an image. Then, with the help of our internal Machine Learning model, we detect characters within their image to the
+            best of our ability.
+
+            <br /> <br />
+
+            Click on <b>"DRAWING"</b> or <b>"DETECT"</b> to continue.
+
+          </Typography>
+        </TextBox>
+      </Grid>
+      <Grid item xs={2}>
+        <Title component="h1">
           Gallery
         </Title>
         <Box>
-          <TextBox>
-            Below are some samples of images taken from the emnist dataset. 
+          <Typography
+            align="left"
+            marginLeft="5%"
+            variant="h5">
+            Below are some samples of images taken from the emnist dataset. Eventually, when more user data becomes available,
+            we will be able to see drawings from other users:
+          </Typography>
+          <TextBox
+            style={
+              {
+                marginLeft:"5%",
+                marginRight:"5%",
+                border: '2px solid black',
+                marginTop: "1%"
+              }
+            }
+          >
+            <Grid
+              container
+              style={{
+                justifyContent: "center",
+                alignContent: "center",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              p={4} 
+              spacing={{ xs: 1, md: 1 }}
+              columns={{ xs: 4, sm: 12, md: 16 }}>
+
+                {Array.from(Array(20)).map((_, index) => (
+                  <Grid item xs={2} sm={4} md={4} key={index}>
+                    <Box>
+                      <img
+                        src={require(`./../../galleryimages/image${index}.png`)}
+                        alt={`image${index}`}
+                        loading="lazy"
+                        width="250" 
+                        height="200"
+                      />
+                    </Box>
+                  </Grid>
+                ))}
+            </Grid>
           </TextBox>
-          <Grid container p={2} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 12, md: 16 }}>
-            {Array.from(Array(20)).map((_, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <Box>
-                  <img
-                    src={require(`./../../galleryimages/image${index}.png`)}
-                    alt={`image${index}`}
-                    loading="lazy"
-                    width="250" 
-                    height="200"
-                  />
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
 
         </Box>
       </Grid>
