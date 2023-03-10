@@ -18,7 +18,7 @@ class Base64ImageField(serializers.ImageField):
         # If it is, extract the image data and decode it
         format, imgstr = data.split(';base64,')
         ext = "png"
-        data = ContentFile(base64.b64decode(imgstr), name=f'temp.{ext}')
+        data = ContentFile(base64.b64decode(imgstr), name=f'digit_imgs/img.{ext}')
         # Use PIL to create an Image object from the decoded image data
         # print("raw string\n\n", imgstr)
         # print("testing got here1\n")

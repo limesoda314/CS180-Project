@@ -2,3 +2,4 @@ venv/
 django_venv/
 .env
 node_modules
+digit_imgs/

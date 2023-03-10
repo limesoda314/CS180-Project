@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'images.apps.ImagesConfig', # activate Images app :')
     'rest_framework', # enables rest_framework :')
+    'emnistmodel',
     # 'client', # most painful part tbh, enables frontend app
 ]
 

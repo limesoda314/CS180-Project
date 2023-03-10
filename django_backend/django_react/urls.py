@@ -16,7 +16,12 @@ Including another URLconf
 # from django.contrib import admin # NOT NEEDED FOR NOW
 from django.urls import path, include
 
+from emnistmodel import views
+
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include('images.urls')),
+
+    # machine learning model
+    path("model/", views.call_model.as_view())
 ]
